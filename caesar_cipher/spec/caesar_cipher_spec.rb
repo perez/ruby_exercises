@@ -1,4 +1,4 @@
-require './lib/caesar_cipher'
+require_relative '../lib/caesar_cipher'
 
 RSpec.describe '#caesar_cipher' do
   it 'returns an empty string' do

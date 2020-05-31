@@ -1,4 +1,4 @@
-require './lib/stock_picker'
+require_relative '../lib/stock_picker'
 
 RSpec.describe '#stock_picker' do
   it 'returns a pair of prices representing the best days to buy and sell stocks' do

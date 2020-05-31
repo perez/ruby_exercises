@@ -1,4 +1,4 @@
-require './lib/bubble_sort'
+require_relative '../lib/bubble_sort'
 
 RSpec.describe '#bubble_sort' do
   it 'returns a sorted array of several items' do
