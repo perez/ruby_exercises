@@ -6,7 +6,7 @@ RSpec.describe '#bubble_sort' do
   end
 
   it 'returns a sorted array of many items' do
-    expect(bubble_sort([4, 3, 8, 5, 2, 7, 13, 9, 20, 11, 17, 12, 15, 18])).to eql([2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 15, 17, 18, 20])
+    expect(bubble_sort([4,3,8,5,2,7,13,9,20,11,17,12,15,18])).to eql([2,3,4,5,7,8,9,11,12,13,15,17,18,20])
   end
 
   it 'returns an already sorted array' do
