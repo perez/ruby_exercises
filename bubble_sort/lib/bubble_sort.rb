@@ -1,19 +1,19 @@
-def bubble_sort(array)
-  return 'Empty array' if array.empty?
+def bubble_sort(arr)
+  return 'Empty array' if arr.empty?
 
-  n = array.length - 1
+  n = arr.length - 1
 
   n.times do
     i = 0
 
     until i == n
-      if array[i] > array[i + 1]
-        array[i], array[i + 1] = array[i + 1], array[i]
+      if arr[i] > arr[i + 1]
+        arr[i], arr[i + 1] = arr[i + 1], arr[i]
       end
 
       i += 1
     end
   end
   
-  array
+  arr
 end
