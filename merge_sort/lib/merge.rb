@@ -12,18 +12,14 @@ def merge(arr1, arr2)
       sorted << arr1[num1]
       
       num1 += 1
-    elsif arr1[num1] < arr2[num2]
+    elsif arr1[num1] <= arr2[num2]
       sorted << arr1[num1]
 
       num1 += 1
-    elsif arr1[num1] > arr2[num2]
+    else
       sorted << arr2[num2]
 
       num2 += 1
-    else
-      sorted << arr1[num1]
-
-      num1 += 1
     end
   end
 
