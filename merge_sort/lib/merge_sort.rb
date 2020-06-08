@@ -1,13 +1,11 @@
 require_relative 'merge.rb'
 
 def merge_sort(arr)
-  if arr.length < 2
-    arr
-  else
-    arr_left = arr[0..(arr.length / 2 - 1)]
-    
-    arr_right = arr[(arr.length / 2)..-1]
+  return arr if arr.length < 2
 
-    merge(merge_sort(arr_left), merge_sort(arr_right))
-  end
+  arr_left = arr[0..(arr.length / 2 - 1)]
+    
+  arr_right = arr[(arr.length / 2)..-1]
+
+  merge(merge_sort(arr_left), merge_sort(arr_right))
 end
