@@ -1,9 +1,15 @@
 class Node
-  attr_accessor :root, :left_node, :right_node
+  include Comparable
 
-  def initialize(root)
-    @root = root
+  attr_accessor :data, :left_node, :right_node
+
+  def initialize(data)
+    @data = data
     @left_node = nil
     @right_node = nil
+  end
+
+  def <=>(other)
+    self.data <=> other.data
   end
 end
