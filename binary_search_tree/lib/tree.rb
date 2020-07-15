@@ -29,14 +29,14 @@ class Tree
   end
 
   def find(value)
-    current_node = @root
+    root_node = @root
 
-    until value == current_node.data
-      current_node = value >= current_node.data ? current_node.right : current_node.left
-
-      break if current_node.nil?
+    until root_node.data == value
+      root_node = root_node.data >= value ? root_node.left : root_node.right
+      
+      break if root_node.nil?
     end
 
-    current_node
+    root_node
   end
 end
