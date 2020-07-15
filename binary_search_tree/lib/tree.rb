@@ -39,4 +39,10 @@ class Tree
 
     root_node
   end
+
+  def find_smallest_node(node)
+    node = node.left until node.left.nil?
+
+    node
+  end
 end
