@@ -45,4 +45,53 @@ class Tree
 
     node
   end
+
+  def delete(value)
+    node_to_delete = find(value)
+
+    if node_to_delete.nil?
+      return nil
+    elsif node_to_delete.left.nil? && node_to_delete.right.nil?
+      delete_leaf(@root, node_to_delete)
+    elsif node_to_delete.left && node_to_delete.right
+      delete_node_with_children(node_to_delete)
+    else
+      delete_node_with_child(@root, node_to_delete)
+    end
+
+    value
+  end
+
+  def delete_leaf(root_node, node)
+    if node >= root_node
+      root_node.right == node ? root_node.right = nil : delete_leaf(root_node.right, node)
+    else
+      root_node.left == node ? root_node.left = nil : delete_leaf(root_node.left, node)
+    end
+  end
+  
+  def delete_node_with_children(node)
+    temp = find_smallest_node(node.right)
+
+    delete(temp.data)
+
+    node.data = temp.data
+  end
+  
+  def delete_node_with_child(root_node, node)
+    if node >= root_node
+      if node == root_node.right
+        root_node.right = node.right.nil? ? node.left : node.right
+      else
+        delete_node_with_child(root_node.right, node)
+      end
+    else
+      if node == root_node.left
+        root_node.left = node.right.nil? ? node.left : node.right
+      else
+        delete_node_with_child(root_node.left, node)
+      end
+    end
+  end
+
 end
