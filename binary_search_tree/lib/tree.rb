@@ -1,19 +1,22 @@
 class Tree
-  attr_accessor :arr, :root
+  attr_reader :root
 
-  def initialize(arr)
-    @arr = arr.uniq
-    @root = Node.new(@arr.first)
+  def initialize(arr = nil)
+    @root = build_tree(arr)
   end
   
-  def build_tree
-    @arr.each do |data|
-      next if data == arr.first
+  def build_tree(arr)
+    return if arr.nil?
 
-      insert(@root, Node.new(data))
+    root = Node.new(arr.first)
+
+    arr.uniq.each do |value|
+      next if value == arr.first
+
+      insert(root, Node.new(value))
     end
-    
-    @root
+
+    root
   end
 
   def insert(root_node, new_node)
@@ -93,5 +96,4 @@ class Tree
       end
     end
   end
-
 end
