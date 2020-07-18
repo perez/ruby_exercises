@@ -2,21 +2,15 @@ class Tree
   attr_reader :root
 
   def initialize(arr = nil)
-    @root = build_tree(arr)
+    @root = arr.nil? ? arr : build_tree(arr.sort.uniq)
   end
   
   def build_tree(arr)
-    return if arr.nil?
+    tree = Node.new(arr.shift)
 
-    root = Node.new(arr.first)
+    arr.each { |value| insert(tree, Node.new(value)) }
 
-    arr.uniq.each do |value|
-      next if value == arr.first
-
-      insert(root, Node.new(value))
-    end
-
-    root
+    tree
   end
 
   def insert(root_node, new_node)
@@ -94,6 +88,20 @@ class Tree
       else
         delete_node_with_child(root_node.left, node)
       end
+    end
+  end
+
+  def level_order
+    return if @root.nil?
+    
+    level_order_array = Array.new(1, @root.data)
+
+    level_order_array.each do |value|
+      root_node = find(value)
+
+      level_order_array << root_node.left.data unless root_node.left.nil?
+
+      level_order_array << root_node.right.data unless root_node.right.nil?
     end
   end
 end
