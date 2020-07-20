@@ -2,7 +2,7 @@ class Tree
   attr_reader :root
 
   def initialize(arr = nil)
-    @arr = arr.sort.uniq unless (arr.nil? || arr.empty?)
+    @arr = arr.sort.uniq unless arr.nil?
     @root = build_tree(@arr, 0, @arr.length - 1) unless arr.nil?
   end
 
@@ -20,14 +20,16 @@ class Tree
     tree
   end
 
-  def insert(root_node, new_node)
+  def insert(node, root_node = @root)
+    return if find(node.data)
+
     if root_node.nil?
-      root_node = new_node
+      root_node = node
     else
-      if new_node >= root_node
-        root_node.right.nil? ? root_node.right = new_node : insert(root_node.right, new_node)
+      if node >= root_node
+        root_node.right.nil? ? root_node.right = node : insert(node, root_node.right)
       else
-        root_node.left.nil? ? root_node.left = new_node : insert(root_node.left, new_node)
+        root_node.left.nil? ? root_node.left = node : insert(node, root_node.left)
       end
     end
   end
@@ -46,6 +48,8 @@ class Tree
 
   def find_smallest_node(node)
     node = node.left until node.left.nil?
+    
+    node
   end
 
   def delete(value)
@@ -109,5 +113,5 @@ class Tree
       level_order_array << root_node.right.data unless root_node.right.nil?
     end
   end
-  
+
 end
