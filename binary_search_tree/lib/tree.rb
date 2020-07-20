@@ -43,7 +43,7 @@ class Tree
       break if root_node.nil?
     end
 
-    root_node
+    root_node.inspect unless root_node.nil?
   end
 
   def find_smallest_node(node)
