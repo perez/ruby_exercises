@@ -6,20 +6,6 @@ class Tree
     @root = build_tree(@arr, 0, @arr.length - 1) unless arr.nil?
   end
 
-  def build_tree(arr, arr_start, arr_end)
-    return if arr_start > arr_end
-
-    arr_middle = (arr_start + arr_end) / 2
-
-    tree = Node.new(arr[arr_middle])
-
-    tree.left = build_tree(arr, arr_start, arr_middle - 1)
-
-    tree.right = build_tree(arr, arr_middle + 1, arr_end)
-
-    tree
-  end
-
   def insert(node, root_node = @root)
     return if find(node.data)
 
@@ -32,24 +18,6 @@ class Tree
         root_node.left.nil? ? root_node.left = node : insert(node, root_node.left)
       end
     end
-  end
-
-  def find(value)
-    root_node = @root
-
-    until root_node.data == value
-      root_node = root_node.data >= value ? root_node.left : root_node.right
-      
-      break if root_node.nil?
-    end
-
-    root_node.inspect unless root_node.nil?
-  end
-
-  def find_smallest_node(node)
-    node = node.left until node.left.nil?
-    
-    node
   end
 
   def delete(value)
@@ -66,6 +34,48 @@ class Tree
     end
 
     value
+  end
+
+  def find(value)
+    root_node = @root
+
+    until root_node.data == value
+      root_node = root_node.data >= value ? root_node.left : root_node.right
+      
+      break if root_node.nil?
+    end
+
+    root_node unless root_node.nil?
+  end
+
+  def level_order
+    return if @root.nil?
+    
+    level_order_array = Array.new(1, @root.data)
+
+    level_order_array.each do |value|
+      root_node = find(value)
+
+      level_order_array << root_node.left.data unless root_node.left.nil?
+
+      level_order_array << root_node.right.data unless root_node.right.nil?
+    end
+  end
+
+  private
+
+  def build_tree(arr, arr_start, arr_end)
+    return if arr_start > arr_end
+
+    arr_middle = (arr_start + arr_end) / 2
+
+    tree = Node.new(arr[arr_middle])
+
+    tree.left = build_tree(arr, arr_start, arr_middle - 1)
+
+    tree.right = build_tree(arr, arr_middle + 1, arr_end)
+
+    tree
   end
 
   def delete_leaf(root_node, node)
@@ -100,18 +110,10 @@ class Tree
     end
   end
 
-  def level_order
-    return if @root.nil?
+  def find_smallest_node(node)
+    node = node.left until node.left.nil?
     
-    level_order_array = Array.new(1, @root.data)
-
-    level_order_array.each do |value|
-      root_node = find(value)
-
-      level_order_array << root_node.left.data unless root_node.left.nil?
-
-      level_order_array << root_node.right.data unless root_node.right.nil?
-    end
+    node
   end
 
 end
