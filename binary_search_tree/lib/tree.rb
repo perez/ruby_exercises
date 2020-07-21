@@ -75,6 +75,18 @@ class Tree
     end
   end
 
+  def depth(value = @root)
+    root_node = Integer === value ? find(value) : value
+  
+    return -1 if root_node.nil?
+  
+    left = depth(root_node.left)
+  
+    right = depth(root_node.right)
+  
+    return [left, right].max + 1
+  end
+
   private
 
   def build_tree(arr, arr_start, arr_end)
@@ -164,5 +176,4 @@ class Tree
 
     depth_array
   end
-
 end
