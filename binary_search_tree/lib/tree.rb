@@ -107,6 +107,14 @@ class Tree
     end
   end
 
+  def rebalance
+    return if balanced?
+
+    new_array = level_order.sort
+  
+    @root = build_tree(new_array, 0, new_array.length - 1) unless new_array.nil?
+  end
+
   private
 
   def build_tree(arr, arr_start, arr_end)
