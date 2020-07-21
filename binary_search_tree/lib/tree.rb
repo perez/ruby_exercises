@@ -87,6 +87,26 @@ class Tree
     return [left, right].max + 1
   end
 
+  def balanced?
+    return nil if @root.nil?
+    
+    tree_array = depth_order(:inorder)
+  
+    tree_array_root = tree_array.index(@root.data) 
+    
+    left_subtree = tree_array[0..(tree_array_root - 1)].length
+  
+    right_subtree = tree_array[(tree_array_root + 1)..-1].length
+  
+    if left_subtree == right_subtree
+      true
+    elsif (left_subtree - right_subtree == 1) || (right_subtree - left_subtree == 1)
+      true 
+    else
+      false
+    end
+  end
+
   private
 
   def build_tree(arr, arr_start, arr_end)
