@@ -62,6 +62,19 @@ class Tree
     end
   end
 
+  def depth_order(order)
+    case order
+    when :preorder
+      preorder
+    when :inorder
+      inorder
+    when :postorder
+      postorder
+    else
+      "Please use ':preorder', ':inorder', or ':postorder' as the arguement."
+    end
+  end
+
   private
 
   def build_tree(arr, arr_start, arr_end)
@@ -114,6 +127,42 @@ class Tree
     node = node.left until node.left.nil?
     
     node
+  end
+  
+  def preorder(root_node = @root, depth_array = [])
+    return if root_node.nil?
+
+    depth_array << root_node.data
+      
+    preorder(root_node.left, depth_array)
+      
+    preorder(root_node.right, depth_array)
+    
+    depth_array
+  end
+  
+  def inorder(root_node = @root, depth_array = [])
+    return if root_node.nil?
+    
+    inorder(root_node.left, depth_array)
+      
+    depth_array << root_node.data
+      
+    inorder(root_node.right, depth_array)
+
+    depth_array
+  end
+  
+  def postorder(root_node = @root, depth_array = [])
+    return if root_node.nil?
+
+    postorder(root_node.left, depth_array)
+      
+    postorder(root_node.right, depth_array)
+      
+    depth_array << root_node.data
+
+    depth_array
   end
 
 end
