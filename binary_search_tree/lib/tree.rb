@@ -41,7 +41,7 @@ class Tree
 
     until root_node.data == value
       root_node = root_node.data >= value ? root_node.left : root_node.right
-      
+
       break if root_node.nil?
     end
 
@@ -50,7 +50,7 @@ class Tree
 
   def level_order
     return if @root.nil?
-    
+
     level_order_array = Array.new(1, @root.data)
 
     level_order_array.each do |value|
@@ -76,32 +76,32 @@ class Tree
   end
 
   def depth(value = @root)
-    root_node = Integer === value ? find(value) : value
-  
+    root_node = value.class == Integer ? find(value) : value
+
     return -1 if root_node.nil?
-  
+
     left = depth(root_node.left)
-  
+
     right = depth(root_node.right)
-  
+
     return [left, right].max + 1
   end
 
   def balanced?
     return nil if @root.nil?
-    
+
     tree_array = depth_order(:inorder)
-  
-    tree_array_root = tree_array.index(@root.data) 
-    
+
+    tree_array_root = tree_array.index(@root.data)
+
     left_subtree = tree_array[0..(tree_array_root - 1)].length
-  
+
     right_subtree = tree_array[(tree_array_root + 1)..-1].length
-  
+
     if left_subtree == right_subtree
       true
     elsif (left_subtree - right_subtree == 1) || (right_subtree - left_subtree == 1)
-      true 
+      true
     else
       false
     end
@@ -111,7 +111,7 @@ class Tree
     return if balanced?
 
     new_array = level_order.sort
-  
+
     @root = build_tree(new_array, 0, new_array.length - 1) unless new_array.nil?
   end
 
@@ -138,7 +138,7 @@ class Tree
       root_node.left == node ? root_node.left = nil : delete_leaf(root_node.left, node)
     end
   end
-  
+
   def delete_node_with_children(node)
     temp = find_smallest_node(node.right)
 
@@ -146,7 +146,7 @@ class Tree
 
     node.data = temp.data
   end
-  
+
   def delete_node_with_child(root_node, node)
     if node >= root_node
       if node == root_node.right
@@ -165,41 +165,41 @@ class Tree
 
   def find_smallest_node(node)
     node = node.left until node.left.nil?
-    
+
     node
   end
-  
+
   def preorder(root_node = @root, depth_array = [])
     return if root_node.nil?
 
     depth_array << root_node.data
-      
+
     preorder(root_node.left, depth_array)
-      
+
     preorder(root_node.right, depth_array)
-    
+
     depth_array
   end
-  
+
   def inorder(root_node = @root, depth_array = [])
     return if root_node.nil?
-    
+
     inorder(root_node.left, depth_array)
-      
+
     depth_array << root_node.data
-      
+
     inorder(root_node.right, depth_array)
 
     depth_array
   end
-  
+
   def postorder(root_node = @root, depth_array = [])
     return if root_node.nil?
 
     postorder(root_node.left, depth_array)
-      
+
     postorder(root_node.right, depth_array)
-      
+
     depth_array << root_node.data
 
     depth_array
