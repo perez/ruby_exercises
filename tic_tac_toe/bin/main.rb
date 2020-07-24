@@ -1,6 +1,6 @@
-require './lib/board'
-require './lib/tic_tac_toe'
-require './lib/player'
+require_relative '../lib/board'
+require_relative '../lib/tic_tac_toe'
+require_relative '../lib/player'
 
 print "-----------\nTIC-TAC-TOE\n-----------\nPlay | Exit\n-----------\n~> "
 
