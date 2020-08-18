@@ -1,39 +1,37 @@
-print "Please enter the start square:\n~> "
+print "Please enter the start point:\n~> "
 
-start_square = nil
-
-loop do
-  input = $stdin.gets.strip.downcase
-
-  case input
-  when /^\d, ?\d$/
-    start_square = input.split(',').map(&:to_i)
-
-    break
-  when 'exit'
-    exit
-  else
-    print "Please enter a start square (e.g. '3, 4') or 'Exit' to exit the program:\n~> "
-  end
-end
-
-print "Please enter the end square:\n~> "
-
-end_square = nil
+start_point = nil
 
 loop do
   input = $stdin.gets.strip.downcase
 
   case input
-  when /^\d, ?\d$/
-    end_square = input.split(',').map(&:to_i)
+  when /^[0-7], ?[0-7]$/
+    start_point = input.split(',').map(&:to_i)
 
     break
   when 'exit'
     exit
   else
-    print "Please enter an end square (e.g. '2, 3') or 'Exit' to exit the program:\n~> "
+    print "Please enter a start point (e.g. '3, 4') or 'Exit' to exit the program:\n~> "
   end
 end
 
-puts "knight_moves(#{start_square}, #{end_square})"
+print "Please enter the end point:\n~> "
+
+end_point = nil
+
+loop do
+  input = $stdin.gets.strip.downcase
+
+  case input
+  when /^[0-7], ?[0-7]$/
+    end_point = input.split(',').map(&:to_i)
+
+    break
+  when 'exit'
+    exit
+  else
+    print "Please enter an end point (e.g. '2, 3') or 'Exit' to exit the program:\n~> "
+  end
+end
